@@ -53,6 +53,7 @@ Return arguments to be supplied to `rx'."
     ;; other values are error
     ))
 
+;;;###autoload
 (defmacro rx-insensitive (&rest args)
   "Create a case-insensitive regular expression similar to `rx'."
   `(rx ,@(mapcar #'rx-insensitive--each args)))
