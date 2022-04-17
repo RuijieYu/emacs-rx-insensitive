@@ -1,4 +1,4 @@
-;;; rx-insensitive.el --- rx but case-insensitive -*- lexical-binding: t; -*-
+;;; rx-insensitive.el --- rx but case-insensitive
 
 ;;; Commentary:
 
@@ -127,7 +127,8 @@ any form of `rx'."
 
 (defun rx-insensitive--each (arg)
   "Process a single item ARG from argument list of `rx-insensitive'.
-Return arguments to be supplied to `rx'."
+Return a single value translated from ARG to be supplied to
+`rx'."
   (pcase arg
     ;; when character, convert to upper and lower
     ((pred characterp)
@@ -141,7 +142,7 @@ Return arguments to be supplied to `rx'."
     ;; what is semivowel-lower? I don't think there is a
     ;; corresponding uppercase counterpart, and it does not match
     ;; with "a...z", so I'm not worried about it
-    ('semivowel arg)
+    (`(category . ,_) arg)
     ;; (eval EXPR): evaluate EXPR and convert insensitive
     (`(eval . ,expr)
      (let ((expr (car expr)))
